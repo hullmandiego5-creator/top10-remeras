@@ -3,480 +3,565 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Top 10 Remeras Más Vendidas</title>
+<title>The Jersey Palace — Top 10</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background: #0d0d14;
-    color: #e0e0e0;
-    padding: 40px 20px 60px;
-  }
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #0d0d14;
+  color: #e0e0e0;
+  padding: 40px 24px 70px;
+}
 
-  .brand-header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
+/* ── HEADER ── */
+.brand {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.brand img {
+  width: 140px;
+  filter: drop-shadow(0 4px 20px rgba(240,192,64,0.3));
+  display: block;
+  margin: 0 auto 14px;
+}
+.brand-name {
+  font-size: 2.6rem;
+  font-weight: 900;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #f0c040, #e07020);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.brand-sub {
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: #444;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
 
-  .brand-logo {
-    width: 160px;
-    height: 160px;
-    object-fit: contain;
-    margin-bottom: 10px;
-    filter: drop-shadow(0 4px 24px rgba(240,192,64,0.25));
-  }
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #f0c040;
+  border-left: 3px solid #e07020;
+  padding-left: 10px;
+  margin-bottom: 16px;
+}
 
-  .brand-name {
-    font-size: 2.8rem;
-    font-weight: 900;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    background: linear-gradient(135deg, #f0c040, #e07020);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
+.wrap { max-width: 820px; margin: 0 auto; }
+.mb { margin-bottom: 56px; }
 
-  h1 {
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #555;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
+/* ── RANKING ── */
+.ranking { display: flex; flex-direction: column; gap: 6px; }
 
-  .subtitle {
-    text-align: center;
-    color: #444;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 48px;
-  }
+.rank-row {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  background: #13131e;
+  border-radius: 10px;
+  padding: 14px 18px;
+  border: 1px solid #1e1e30;
+}
+.rank-row:hover { background: #17172a; }
 
-  .section-label {
-    max-width: 860px;
-    margin: 0 auto 14px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: #f0c040;
-    border-left: 3px solid #e07020;
-    padding-left: 10px;
-  }
+.pos {
+  font-size: 1rem;
+  font-weight: 900;
+  text-align: center;
+}
+.pos-1 { color: #FFD700; }
+.pos-2 { color: #C0C0C0; }
+.pos-3 { color: #CD7F32; }
+.pos-n { color: #333; font-size: 0.95rem; }
 
-  /* ── TOP 10 TABLE ── */
-  .top10-wrap {
-    max-width: 860px;
-    margin: 0 auto 64px;
-  }
+.rank-mid { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 
-  .top10-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #13131e;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-  }
+.prod-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-  .top10-table thead tr {
-    background: #1a1a2e;
-  }
+.bar-track {
+  height: 6px;
+  background: #1e1e30;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #e07020, #f0c040);
+}
 
-  .top10-table th {
-    padding: 13px 20px;
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #666;
-    text-align: left;
-  }
+.qty {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #f0c040;
+  min-width: 44px;
+  text-align: right;
+  flex-shrink: 0;
+}
 
-  .top10-table th.right { text-align: right; }
+/* ── CARDS GRID ── */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 580px) {
+  .cards { grid-template-columns: 1fr; }
+  .brand-name { font-size: 1.7rem; letter-spacing: 3px; }
+  .prod-name { white-space: normal; }
+}
 
-  .top10-table td {
-    padding: 0;
-    border-top: 1px solid #1e1e30;
-  }
+.card {
+  background: #13131e;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #1e1e30;
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #1a1a2e;
+}
+.card-badge {
+  background: linear-gradient(135deg, #e07020, #f0c040);
+  color: #000;
+  font-weight: 900;
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+.card-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+}
 
-  .top10-table tbody tr:hover { background: #17172a; }
+.card-body { padding: 10px 16px 14px; display: flex; flex-direction: column; gap: 8px; }
 
-  .row-inner {
-    display: flex;
-    align-items: center;
-    padding: 14px 20px;
-    gap: 16px;
-  }
+.item { display: grid; grid-template-columns: 1fr 36px; align-items: center; gap: 10px; }
 
-  .pos {
-    font-size: 1rem;
-    font-weight: 900;
-    min-width: 32px;
-    text-align: center;
-    flex-shrink: 0;
-  }
-  .pos-1 { color: #FFD700; }
-  .pos-2 { color: #C0C0C0; }
-  .pos-3 { color: #CD7F32; }
-  .pos-n { color: #333; }
+.item-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ccc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.item-label.muted { color: #444; font-style: italic; font-weight: 400; }
 
-  .prod-name {
-    flex: 1;
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #fff;
-  }
+.item-right { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
 
-  .qty-block {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-width: 200px;
-  }
+.item-qty {
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: #f0c040;
+}
 
-  .qty-num {
-    font-weight: 900;
-    font-size: 1.05rem;
-    color: #f0c040;
-    min-width: 30px;
-    text-align: right;
-    flex-shrink: 0;
-  }
+.item-bar-track {
+  width: 100%;
+  height: 5px;
+  background: #1e1e30;
+  border-radius: 3px;
+  overflow: hidden;
+  grid-column: 1 / -1;
+  margin-top: -4px;
+}
+.item-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #e07020, #f0c040);
+}
+.item-bar-fill.dim { background: linear-gradient(90deg, #2a2a50, #3a3a70); }
 
-  .bar-track {
-    flex: 1;
-    height: 7px;
-    background: #1e1e30;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .bar-fill {
-    height: 100%;
-    border-radius: 4px;
-    background: linear-gradient(90deg, #e07020, #f0c040);
-  }
-
-  /* ── DORSAL CARDS ── */
-  .dorsal-section {
-    max-width: 860px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-
-  @media (max-width: 580px) {
-    .dorsal-section { grid-template-columns: 1fr; }
-    h1 { font-size: 1.4rem; }
-    .qty-block { min-width: 140px; }
-  }
-
-  .d-card {
-    background: #13131e;
-    border-radius: 14px;
-    overflow: hidden;
-    border: 1px solid #1e1e30;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
-  }
-
-  .d-header {
-    padding: 13px 18px;
-    background: #1a1a2e;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .d-pos-badge {
-    background: linear-gradient(135deg, #e07020, #f0c040);
-    color: #000;
-    font-weight: 900;
-    font-size: 0.75rem;
-    padding: 3px 9px;
-    border-radius: 6px;
-    flex-shrink: 0;
-  }
-
-  .d-title {
-    font-size: 0.83rem;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.3;
-  }
-
-  .d-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .d-table thead tr { background: #0f0f1a; }
-
-  .d-table th {
-    padding: 8px 14px;
-    font-size: 0.63rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #444;
-    text-align: left;
-  }
-
-  .d-table th.right { text-align: right; }
-
-  .d-table td {
-    padding: 9px 14px;
-    border-top: 1px solid #1a1a2a;
-    vertical-align: middle;
-  }
-
-  .d-table tbody tr:hover { background: #17172a; }
-  .d-table tbody tr:first-child { background: rgba(240,192,64,0.06); }
-
-  .dorsal-label {
-    font-weight: 700;
-    font-size: 0.88rem;
-    color: #fff;
-  }
-
-  .dorsal-sin {
-    font-size: 0.82rem;
-    color: #555;
-    font-style: italic;
-  }
-
-  .d-qty {
-    font-weight: 900;
-    font-size: 0.95rem;
-    color: #f0c040;
-    text-align: right;
-    white-space: nowrap;
-    padding-left: 8px;
-  }
-
-  .d-bar-cell { width: 50%; }
-
-  .d-bar-track {
-    height: 6px;
-    background: #1e1e30;
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .d-bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    background: linear-gradient(90deg, #e07020, #f0c040);
-  }
-
-  .d-bar-fill.dim {
-    background: linear-gradient(90deg, #2a2a50, #3a3a70);
-  }
+.divider { height: 1px; background: #1e1e30; margin: 2px 0; }
 </style>
 </head>
 <body>
 
-<div class="brand-header">
-  <img src="logo.png" alt="The Jersey Palace" class="brand-logo">
+<!-- HEADER -->
+<div class="brand">
+  <img src="logo.png" alt="The Jersey Palace">
   <div class="brand-name">The Jersey Palace</div>
-</div>
-<h1>TOP 10 — REMERAS MÁS VENDIDAS</h1>
-<p class="subtitle">Ranking por unidades · Mayo 2026</p>
-
-<!-- ════ TOP 10 ════ -->
-<div class="top10-wrap">
-  <p class="section-label">Ranking general</p>
-  <table class="top10-table">
-    <thead>
-      <tr>
-        <th style="width:52px">#</th>
-        <th>Producto</th>
-        <th class="right">Unidades vendidas</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- max = 42 -->
-      <tr><td><div class="row-inner"><span class="pos pos-1">🥇</span><span class="prod-name">ARGENTINA 94 AWAY</span><div class="qty-block"><span class="qty-num">42</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div></div></td></tr>
-      <tr><td><div class="row-inner"><span class="pos pos-2">🥈</span><span class="prod-name">LIVERPOOL 93-94</span><div class="qty-block"><span class="qty-num">29</span><div class="bar-track"><div class="bar-fill" style="width:69%"></div></div></div></div></td></tr>
-      <tr><td><div class="row-inner"><span class="pos pos-3">🥉</span><span class="prod-name">ARGENTINA 2026 HOME</span><div class="qty-block"><span class="qty-num">24</span><div class="bar-track"><div class="bar-fill" style="width:57%"></div></div></div></div></td></tr>
-      <tr><td><div class="row-inner"><span class="pos pos-n">4</span><span class="prod-name">CHELSEA 25-26 AWAY 3TH</span><div class="qty-block"><span class="qty-num">20</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div></div></div></td></tr>
-      <tr><td><div class="row-inner"><span class="pos pos-n">5</span><span class="prod-name">BETIS 24-25 HOME M/L</span><div class="qty-block"><span class="qty-num">19</span><div class="bar-track"><div class="bar-fill" style="width:45%"></div></div></div></div></td></tr>
-      <tr><td><div class="row-inner"><span class="pos pos-n">6</span><span class="prod-name">ARGENTINA 2006 HOME</span><div class="qty-block"><span class="qty-num">18</span><div class="bar-track"><div class="bar-fill" style="width:43%"></div></div></div></div></td></tr>
-      <tr><td><div class="row-inner"><span class="pos pos-n">7</span><span class="prod-name">SHORT CHELSEA AZUL 25-26</span><div class="qty-block"><span class="qty-num">17</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div></div></div></td></tr>
-      <tr><td><div class="row-inner"><span class="pos pos-n">8</span><span class="prod-name">SHORT CHELSEA VERDE 25-26</span><div class="qty-block"><span class="qty-num">16</span><div class="bar-track"><div class="bar-fill" style="width:38%"></div></div></div></div></td></tr>
-      <tr><td><div class="row-inner"><span class="pos pos-n">9</span><span class="prod-name">LIVERPOOL 95-96</span><div class="qty-block"><span class="qty-num">15</span><div class="bar-track"><div class="bar-fill" style="width:36%"></div></div></div></div></td></tr>
-      <tr><td><div class="row-inner"><span class="pos pos-n">9</span><span class="prod-name">SHORT CHELSEA NEGRO 25-26</span><div class="qty-block"><span class="qty-num">15</span><div class="bar-track"><div class="bar-fill" style="width:36%"></div></div></div></div></td></tr>
-    </tbody>
-  </table>
+  <div class="brand-sub">Top 10 · Remeras más vendidas · Mayo 2026</div>
 </div>
 
-<!-- ════ DORSAL POR PRODUCTO ════ -->
-<div class="top10-wrap" style="margin-bottom:20px">
-  <p class="section-label">Unidades por dorsal — desglose por producto</p>
+<!-- ══ RANKING ══ -->
+<div class="wrap mb">
+  <p class="section-label">Ranking general — unidades vendidas</p>
+  <div class="ranking">
+
+    <div class="rank-row">
+      <div class="pos pos-1">🥇</div>
+      <div class="rank-mid">
+        <span class="prod-name">ARGENTINA 94 AWAY</span>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="qty">42</div>
+    </div>
+
+    <div class="rank-row">
+      <div class="pos pos-2">🥈</div>
+      <div class="rank-mid">
+        <span class="prod-name">LIVERPOOL 93-94</span>
+        <div class="bar-track"><div class="bar-fill" style="width:69%"></div></div>
+      </div>
+      <div class="qty">29</div>
+    </div>
+
+    <div class="rank-row">
+      <div class="pos pos-3">🥉</div>
+      <div class="rank-mid">
+        <span class="prod-name">ARGENTINA 2026 HOME</span>
+        <div class="bar-track"><div class="bar-fill" style="width:57%"></div></div>
+      </div>
+      <div class="qty">24</div>
+    </div>
+
+    <div class="rank-row">
+      <div class="pos pos-n">4</div>
+      <div class="rank-mid">
+        <span class="prod-name">CHELSEA 25-26 AWAY 3TH</span>
+        <div class="bar-track"><div class="bar-fill" style="width:48%"></div></div>
+      </div>
+      <div class="qty">20</div>
+    </div>
+
+    <div class="rank-row">
+      <div class="pos pos-n">5</div>
+      <div class="rank-mid">
+        <span class="prod-name">BETIS 24-25 HOME M/L</span>
+        <div class="bar-track"><div class="bar-fill" style="width:45%"></div></div>
+      </div>
+      <div class="qty">19</div>
+    </div>
+
+    <div class="rank-row">
+      <div class="pos pos-n">6</div>
+      <div class="rank-mid">
+        <span class="prod-name">ARGENTINA 2006 HOME</span>
+        <div class="bar-track"><div class="bar-fill" style="width:43%"></div></div>
+      </div>
+      <div class="qty">18</div>
+    </div>
+
+    <div class="rank-row">
+      <div class="pos pos-n">7</div>
+      <div class="rank-mid">
+        <span class="prod-name">SHORT CHELSEA AZUL 25-26</span>
+        <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
+      </div>
+      <div class="qty">17</div>
+    </div>
+
+    <div class="rank-row">
+      <div class="pos pos-n">8</div>
+      <div class="rank-mid">
+        <span class="prod-name">SHORT CHELSEA VERDE 25-26</span>
+        <div class="bar-track"><div class="bar-fill" style="width:38%"></div></div>
+      </div>
+      <div class="qty">16</div>
+    </div>
+
+    <div class="rank-row">
+      <div class="pos pos-n">9</div>
+      <div class="rank-mid">
+        <span class="prod-name">LIVERPOOL 95-96</span>
+        <div class="bar-track"><div class="bar-fill" style="width:36%"></div></div>
+      </div>
+      <div class="qty">15</div>
+    </div>
+
+    <div class="rank-row">
+      <div class="pos pos-n">9</div>
+      <div class="rank-mid">
+        <span class="prod-name">SHORT CHELSEA NEGRO 25-26</span>
+        <div class="bar-track"><div class="bar-fill" style="width:36%"></div></div>
+      </div>
+      <div class="qty">15</div>
+    </div>
+
+  </div>
 </div>
 
-<div class="dorsal-section">
+<!-- ══ DORSAL ══ -->
+<div class="wrap mb">
+  <p class="section-label">Desglose por dorsal</p>
+  <div class="cards">
 
-  <!-- 1. ARGENTINA 94 AWAY -->
-  <div class="d-card">
-    <div class="d-header">
-      <span class="d-pos-badge">#1</span>
-      <span class="d-title">ARGENTINA 94 AWAY</span>
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#1</span><span class="card-title">ARGENTINA 94 AWAY</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">MARADONA · 10</span><span class="item-qty">27</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">CANIGGIA · 7</span><span class="item-qty">7</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:26%"></div></div>
+        <div class="item"><span class="item-label muted">Sin dorsal</span><span class="item-qty" style="color:#444">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill dim" style="width:7%"></div></div>
+      </div>
     </div>
-    <table class="d-table">
-      <thead><tr><th>Dorsal</th><th class="right">Cant.</th><th class="d-bar-cell"></th></tr></thead>
-      <tbody>
-        <tr><td><span class="dorsal-label">MARADONA · 10</span></td><td class="d-qty">27</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:100%"></div></div></td></tr>
-        <tr><td><span class="dorsal-label">CANIGGIA · 7</span></td><td class="d-qty">7</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:26%"></div></div></td></tr>
-        <tr><td><span class="dorsal-sin">Sin dorsal</span></td><td class="d-qty">2</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill dim" style="width:7%"></div></div></td></tr>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- 2. LIVERPOOL 93-94 -->
-  <div class="d-card">
-    <div class="d-header">
-      <span class="d-pos-badge">#2</span>
-      <span class="d-title">LIVERPOOL 93-94</span>
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#2</span><span class="card-title">LIVERPOOL 93-94</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label muted">Sin dorsal</span><span class="item-qty">29</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+      </div>
     </div>
-    <table class="d-table">
-      <thead><tr><th>Dorsal</th><th class="right">Cant.</th><th class="d-bar-cell"></th></tr></thead>
-      <tbody>
-        <tr><td><span class="dorsal-sin">Sin dorsal</span></td><td class="d-qty">29</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:100%"></div></div></td></tr>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- 3. ARGENTINA 2026 HOME -->
-  <div class="d-card">
-    <div class="d-header">
-      <span class="d-pos-badge">#3</span>
-      <span class="d-title">ARGENTINA 2026 HOME</span>
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#3</span><span class="card-title">ARGENTINA 2026 HOME</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label muted">Sin dorsal</span><span class="item-qty">20</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">MESSI · 10</span><span class="item-qty">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:10%"></div></div>
+        <div class="item"><span class="item-label">J. ÁLVAREZ · 9</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:5%"></div></div>
+        <div class="item"><span class="item-label">LO CELSO · 11</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:5%"></div></div>
+      </div>
     </div>
-    <table class="d-table">
-      <thead><tr><th>Dorsal</th><th class="right">Cant.</th><th class="d-bar-cell"></th></tr></thead>
-      <tbody>
-        <tr><td><span class="dorsal-sin">Sin dorsal</span></td><td class="d-qty">20</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:100%"></div></div></td></tr>
-        <tr><td><span class="dorsal-label">MESSI · 10</span></td><td class="d-qty">2</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:10%"></div></div></td></tr>
-        <tr><td><span class="dorsal-label">J. ÁLVAREZ · 9</span></td><td class="d-qty">1</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:5%"></div></div></td></tr>
-        <tr><td><span class="dorsal-label">LO CELSO · 11</span></td><td class="d-qty">1</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:5%"></div></div></td></tr>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- 4. CHELSEA 25-26 AWAY 3TH -->
-  <div class="d-card">
-    <div class="d-header">
-      <span class="d-pos-badge">#4</span>
-      <span class="d-title">CHELSEA 25-26 AWAY 3TH</span>
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#4</span><span class="card-title">CHELSEA 25-26 AWAY 3TH</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">ENZO · 8</span><span class="item-qty">16</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label muted">Sin dorsal</span><span class="item-qty" style="color:#444">3</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill dim" style="width:19%"></div></div>
+        <div class="item"><span class="item-label">BOUNANOTTE · 40</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:6%"></div></div>
+      </div>
     </div>
-    <table class="d-table">
-      <thead><tr><th>Dorsal</th><th class="right">Cant.</th><th class="d-bar-cell"></th></tr></thead>
-      <tbody>
-        <tr><td><span class="dorsal-label">ENZO · 8</span></td><td class="d-qty">16</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:100%"></div></div></td></tr>
-        <tr><td><span class="dorsal-sin">Sin dorsal</span></td><td class="d-qty">3</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill dim" style="width:19%"></div></div></td></tr>
-        <tr><td><span class="dorsal-label">BOUNANOTTE · 40</span></td><td class="d-qty">1</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:6%"></div></div></td></tr>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- 5. BETIS 24-25 HOME M/L -->
-  <div class="d-card">
-    <div class="d-header">
-      <span class="d-pos-badge">#5</span>
-      <span class="d-title">BETIS 24-25 HOME M/L</span>
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#5</span><span class="card-title">BETIS 24-25 HOME M/L</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">LO CELSO · 20</span><span class="item-qty">14</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label muted">Sin dorsal</span><span class="item-qty" style="color:#444">4</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill dim" style="width:29%"></div></div>
+        <div class="item"><span class="item-label">V. GÓMEZ · 16</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:7%"></div></div>
+      </div>
     </div>
-    <table class="d-table">
-      <thead><tr><th>Dorsal</th><th class="right">Cant.</th><th class="d-bar-cell"></th></tr></thead>
-      <tbody>
-        <tr><td><span class="dorsal-label">LO CELSO · 20</span></td><td class="d-qty">14</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:100%"></div></div></td></tr>
-        <tr><td><span class="dorsal-sin">Sin dorsal</span></td><td class="d-qty">4</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill dim" style="width:29%"></div></div></td></tr>
-        <tr><td><span class="dorsal-label">V. GÓMEZ · 16</span></td><td class="d-qty">1</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:7%"></div></div></td></tr>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- 6. ARGENTINA 2006 HOME -->
-  <div class="d-card">
-    <div class="d-header">
-      <span class="d-pos-badge">#6</span>
-      <span class="d-title">ARGENTINA 2006 HOME</span>
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#6</span><span class="card-title">ARGENTINA 2006 HOME</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">MESSI · 19</span><span class="item-qty">9</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">MESSI · 10</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:11%"></div></div>
+      </div>
     </div>
-    <table class="d-table">
-      <thead><tr><th>Dorsal</th><th class="right">Cant.</th><th class="d-bar-cell"></th></tr></thead>
-      <tbody>
-        <tr><td><span class="dorsal-label">MESSI · 19</span></td><td class="d-qty">9</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:100%"></div></div></td></tr>
-        <tr><td><span class="dorsal-label">MESSI · 10</span></td><td class="d-qty">1</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:11%"></div></div></td></tr>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- 7. SHORT CHELSEA AZUL 25-26 -->
-  <div class="d-card">
-    <div class="d-header">
-      <span class="d-pos-badge">#7</span>
-      <span class="d-title">SHORT CHELSEA AZUL 25-26</span>
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#7</span><span class="card-title">SHORT CHELSEA AZUL 25-26</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">· 8</span><span class="item-qty">16</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label muted">Sin dorsal</span><span class="item-qty" style="color:#444">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill dim" style="width:6%"></div></div>
+      </div>
     </div>
-    <table class="d-table">
-      <thead><tr><th>Dorsal</th><th class="right">Cant.</th><th class="d-bar-cell"></th></tr></thead>
-      <tbody>
-        <tr><td><span class="dorsal-label">· 8</span></td><td class="d-qty">16</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:100%"></div></div></td></tr>
-        <tr><td><span class="dorsal-sin">Sin dorsal</span></td><td class="d-qty">1</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill dim" style="width:6%"></div></div></td></tr>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- 8. SHORT CHELSEA VERDE 25-26 -->
-  <div class="d-card">
-    <div class="d-header">
-      <span class="d-pos-badge">#8</span>
-      <span class="d-title">SHORT CHELSEA VERDE 25-26</span>
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#8</span><span class="card-title">SHORT CHELSEA VERDE 25-26</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">· 8</span><span class="item-qty">15</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">· 10</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:7%"></div></div>
+      </div>
     </div>
-    <table class="d-table">
-      <thead><tr><th>Dorsal</th><th class="right">Cant.</th><th class="d-bar-cell"></th></tr></thead>
-      <tbody>
-        <tr><td><span class="dorsal-label">· 8</span></td><td class="d-qty">15</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:100%"></div></div></td></tr>
-        <tr><td><span class="dorsal-label">· 10</span></td><td class="d-qty">1</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:7%"></div></div></td></tr>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- 9. LIVERPOOL 95-96 -->
-  <div class="d-card">
-    <div class="d-header">
-      <span class="d-pos-badge">#9</span>
-      <span class="d-title">LIVERPOOL 95-96</span>
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#9</span><span class="card-title">LIVERPOOL 95-96</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label muted">Sin dorsal</span><span class="item-qty">15</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+      </div>
     </div>
-    <table class="d-table">
-      <thead><tr><th>Dorsal</th><th class="right">Cant.</th><th class="d-bar-cell"></th></tr></thead>
-      <tbody>
-        <tr><td><span class="dorsal-sin">Sin dorsal</span></td><td class="d-qty">15</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:100%"></div></div></td></tr>
-      </tbody>
-    </table>
-  </div>
 
-  <!-- 10. SHORT CHELSEA NEGRO 25-26 -->
-  <div class="d-card">
-    <div class="d-header">
-      <span class="d-pos-badge">#9</span>
-      <span class="d-title">SHORT CHELSEA NEGRO 25-26</span>
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#9</span><span class="card-title">SHORT CHELSEA NEGRO 25-26</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">· 8</span><span class="item-qty">13</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">· 10</span><span class="item-qty">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:15%"></div></div>
+      </div>
     </div>
-    <table class="d-table">
-      <thead><tr><th>Dorsal</th><th class="right">Cant.</th><th class="d-bar-cell"></th></tr></thead>
-      <tbody>
-        <tr><td><span class="dorsal-label">· 8</span></td><td class="d-qty">13</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:100%"></div></div></td></tr>
-        <tr><td><span class="dorsal-label">· 10</span></td><td class="d-qty">2</td><td class="d-bar-cell"><div class="d-bar-track"><div class="d-bar-fill" style="width:15%"></div></div></td></tr>
-      </tbody>
-    </table>
-  </div>
 
+  </div>
+</div>
+
+<!-- ══ TALLES ══ -->
+<div class="wrap">
+  <p class="section-label">Desglose por talle</p>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#1</span><span class="card-title">ARGENTINA 94 AWAY</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">XL</span><span class="item-qty">12</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">L</span><span class="item-qty">6</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:50%"></div></div>
+        <div class="item"><span class="item-label">2XL</span><span class="item-qty">5</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:42%"></div></div>
+        <div class="item"><span class="item-label">M</span><span class="item-qty">3</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:25%"></div></div>
+        <div class="item"><span class="item-label">S</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:8%"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#2</span><span class="card-title">LIVERPOOL 93-94</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">XL</span><span class="item-qty">11</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">2XL</span><span class="item-qty">9</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:82%"></div></div>
+        <div class="item"><span class="item-label">L</span><span class="item-qty">5</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:45%"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#3</span><span class="card-title">ARGENTINA 2026 HOME</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">XL</span><span class="item-qty">5</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">L</span><span class="item-qty">3</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:60%"></div></div>
+        <div class="item"><span class="item-label">2XL</span><span class="item-qty">3</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:60%"></div></div>
+        <div class="item"><span class="item-label">M</span><span class="item-qty">3</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:60%"></div></div>
+        <div class="item"><span class="item-label">3XL</span><span class="item-qty">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:40%"></div></div>
+        <div class="item"><span class="item-label">4XL</span><span class="item-qty">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:40%"></div></div>
+        <div class="item"><span class="item-label">S</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:20%"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#4</span><span class="card-title">CHELSEA 25-26 AWAY 3TH</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">2XL</span><span class="item-qty">3</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">XL</span><span class="item-qty">3</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">L</span><span class="item-qty">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:67%"></div></div>
+        <div class="item"><span class="item-label">3XL</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:33%"></div></div>
+        <div class="item"><span class="item-label">M</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:33%"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#5</span><span class="card-title">BETIS 24-25 HOME M/L</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">XL</span><span class="item-qty">8</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">2XL</span><span class="item-qty">4</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:50%"></div></div>
+        <div class="item"><span class="item-label">XXL</span><span class="item-qty">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:25%"></div></div>
+        <div class="item"><span class="item-label">L</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:12%"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#6</span><span class="card-title">ARGENTINA 2006 HOME</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">XL</span><span class="item-qty">3</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">L</span><span class="item-qty">3</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">M</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:33%"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#7</span><span class="card-title">SHORT CHELSEA AZUL 25-26</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">XL</span><span class="item-qty">3</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">2XL</span><span class="item-qty">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:67%"></div></div>
+        <div class="item"><span class="item-label">L</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:33%"></div></div>
+        <div class="item"><span class="item-label">M</span><span class="item-qty">1</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:33%"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#8</span><span class="card-title">SHORT CHELSEA VERDE 25-26</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">L</span><span class="item-qty">4</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">XL</span><span class="item-qty">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:50%"></div></div>
+        <div class="item"><span class="item-label">2XL</span><span class="item-qty">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:50%"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#9</span><span class="card-title">LIVERPOOL 95-96</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">XL</span><span class="item-qty">4</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">L</span><span class="item-qty">3</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:75%"></div></div>
+        <div class="item"><span class="item-label">2XL</span><span class="item-qty">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:50%"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-badge">#9</span><span class="card-title">SHORT CHELSEA NEGRO 25-26</span></div>
+      <div class="card-body">
+        <div class="item"><span class="item-label">XL</span><span class="item-qty">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">2XL</span><span class="item-qty">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+        <div class="item"><span class="item-label">L</span><span class="item-qty">2</span></div>
+        <div class="item-bar-track"><div class="item-bar-fill" style="width:100%"></div></div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 </body>
