@@ -14,20 +14,45 @@
     padding: 40px 20px 60px;
   }
 
-  h1 {
+  .brand-header {
     text-align: center;
-    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+
+  .brand-logo {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 4px 24px rgba(240,192,64,0.25));
+  }
+
+  .brand-name {
+    font-size: 2.8rem;
     font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
     background: linear-gradient(135deg, #f0c040, #e07020);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #555;
+    letter-spacing: 3px;
+    text-transform: uppercase;
     margin-bottom: 4px;
   }
 
   .subtitle {
     text-align: center;
-    color: #555;
-    font-size: 0.8rem;
+    color: #444;
+    font-size: 0.75rem;
     letter-spacing: 1px;
     text-transform: uppercase;
     margin-bottom: 48px;
@@ -258,6 +283,10 @@
 </head>
 <body>
 
+<div class="brand-header">
+  <img src="logo.png" alt="The Jersey Palace" class="brand-logo">
+  <div class="brand-name">The Jersey Palace</div>
+</div>
 <h1>TOP 10 — REMERAS MÁS VENDIDAS</h1>
 <p class="subtitle">Ranking por unidades · Mayo 2026</p>
 
