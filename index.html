@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top 10 Remeras Más Vendidas</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #0a0a0f;
+    color: #e0e0e0;
+    padding: 32px 20px;
+    min-height: 100vh;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #f0c040, #e07020);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    margin-bottom: 40px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== RANKING PRINCIPAL ===== */
+  .ranking-wrapper {
+    max-width: 900px;
+    margin: 0 auto 60px;
+  }
+
+  .section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #f0c040;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    border-left: 4px solid #e07020;
+    padding-left: 12px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #13131a;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  thead tr {
+    background: linear-gradient(135deg, #1a1a28, #22223a);
+  }
+
+  th {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #aaa;
+  }
+
+  th.center, td.center { text-align: center; }
+
+  td {
+    padding: 13px 18px;
+    font-size: 0.92rem;
+    border-top: 1px solid #1e1e2e;
+    vertical-align: middle;
+  }
+
+  tbody tr:hover { background: #1a1a28; transition: background 0.15s; }
+
+  /* Posición con medalla */
+  .rank {
+    font-weight: 900;
+    font-size: 1.1rem;
+    width: 48px;
+    text-align: center;
+  }
+  .rank-1  { color: #FFD700; }
+  .rank-2  { color: #C0C0C0; }
+  .rank-3  { color: #CD7F32; }
+  .rank-other { color: #555; }
+
+  .medal { font-size: 1.2rem; }
+
+  .product-name {
+    font-weight: 700;
+    color: #fff;
+    font-size: 0.95rem;
+  }
+
+  .dorsal-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #e07020, #f0c040);
+    color: #000;
+    font-weight: 900;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .dorsal-none {
+    color: #444;
+    font-size: 0.8rem;
+    font-style: italic;
+  }
+
+  .qty-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .qty-num {
+    font-weight: 900;
+    font-size: 1.05rem;
+    color: #f0c040;
+    min-width: 28px;
+    text-align: right;
+  }
+
+  .bar-bg {
+    flex: 1;
+    height: 8px;
+    background: #222;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #e07020, #f0c040);
+    transition: width 0.4s ease;
+  }
+
+  /* ===== TALLES ===== */
+  .talles-section {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  @media (max-width: 600px) {
+    .talles-section { grid-template-columns: 1fr; }
+    h1 { font-size: 1.4rem; }
+  }
+
+  .talle-card {
+    background: #13131a;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+    border: 1px solid #1e1e2e;
+  }
+
+  .talle-card-header {
+    padding: 14px 18px;
+    background: linear-gradient(135deg, #1a1a28, #22223a);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .talle-rank-badge {
+    background: linear-gradient(135deg, #e07020, #f0c040);
+    color: #000;
+    font-weight: 900;
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .talle-card-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+  }
+
+  .talle-card-dorsal {
+    font-size: 0.72rem;
+    color: #f0c040;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .talle-table { width: 100%; border-collapse: collapse; }
+
+  .talle-table thead tr { background: #0f0f18; }
+
+  .talle-table th {
+    padding: 9px 14px;
+    font-size: 0.7rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .talle-table td {
+    padding: 9px 14px;
+    font-size: 0.88rem;
+    border-top: 1px solid #1e1e2e;
+  }
+
+  .talle-table tbody tr:hover { background: #1a1a28; }
+
+  .talle-name {
+    font-weight: 700;
+    color: #fff;
+    font-size: 0.95rem;
+  }
+
+  .talle-qty {
+    font-weight: 900;
+    color: #f0c040;
+    font-size: 0.95rem;
+  }
+
+  .talle-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .talle-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: #222;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .talle-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+  }
+
+  /* colores por talle */
+  .fill-s   { background: #6eb5ff; }
+  .fill-m   { background: #5ce65c; }
+  .fill-l   { background: #f0c040; }
+  .fill-xl  { background: #e07020; }
+  .fill-2xl { background: #e03060; }
+  .fill-3xl { background: #b030e0; }
+  .fill-4xl { background: #30c0e0; }
+  .fill-def { background: #888; }
+
+  .top-talle { background: rgba(240,192,64,0.08); }
+
+  .footer {
+    text-align: center;
+    color: #333;
+    font-size: 0.75rem;
+    margin-top: 50px;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+
+<h1>TOP 10 — REMERAS MÁS VENDIDAS</h1>
+<p class="subtitle">Ranking por unidades vendidas · Con detalle y dorsal</p>
+
+<!-- ===== RANKING TOP 10 ===== -->
+<div class="ranking-wrapper">
+  <p class="section-title">Ranking General</p>
+  <table>
+    <thead>
+      <tr>
+        <th class="center">#</th>
+        <th>Producto / Detalle</th>
+        <th>Dorsal</th>
+        <th>Unidades Vendidas</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Fila helper: máximo = 29 para la barra -->
+
+      <tr>
+        <td class="rank rank-1 center"><span class="medal">🥇</span></td>
+        <td><span class="product-name">ARGENTINA 94 AWAY</span></td>
+        <td><span class="dorsal-badge">MARADONA · 10</span></td>
+        <td>
+          <div class="qty-bar-wrap">
+            <span class="qty-num">29</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:100%"></div></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rank rank-2 center"><span class="medal">🥈</span></td>
+        <td><span class="product-name">LIVERPOOL 93-94</span></td>
+        <td><span class="dorsal-none">— sin dorsal —</span></td>
+        <td>
+          <div class="qty-bar-wrap">
+            <span class="qty-num">16</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:55%"></div></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rank rank-3 center"><span class="medal">🥉</span></td>
+        <td><span class="product-name">ARGENTINA 2026 HOME</span></td>
+        <td><span class="dorsal-none">— sin dorsal —</span></td>
+        <td>
+          <div class="qty-bar-wrap">
+            <span class="qty-num">14</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:48%"></div></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rank rank-other center">4</td>
+        <td><span class="product-name">BETIS 24-25 HOME M/L</span></td>
+        <td><span class="dorsal-badge">LO CELSO · 20</span></td>
+        <td>
+          <div class="qty-bar-wrap">
+            <span class="qty-num">12</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:41%"></div></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rank rank-other center">5</td>
+        <td><span class="product-name">CHELSEA 25-26 AWAY 3TH</span></td>
+        <td><span class="dorsal-badge">ENZO · 8</span></td>
+        <td>
+          <div class="qty-bar-wrap">
+            <span class="qty-num">11</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:38%"></div></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rank rank-other center">6</td>
+        <td><span class="product-name">SHORT CHELSEA VERDE 25-26</span></td>
+        <td><span class="dorsal-badge">· 8</span></td>
+        <td>
+          <div class="qty-bar-wrap">
+            <span class="qty-num">10</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:34%"></div></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rank rank-other center">6</td>
+        <td><span class="product-name">SHORT CHELSEA NEGRO 25-26</span></td>
+        <td><span class="dorsal-badge">· 8</span></td>
+        <td>
+          <div class="qty-bar-wrap">
+            <span class="qty-num">10</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:34%"></div></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rank rank-other center">8</td>
+        <td><span class="product-name">ARGENTINA 2006 AWAY</span></td>
+        <td><span class="dorsal-badge">MESSI · 19</span></td>
+        <td>
+          <div class="qty-bar-wrap">
+            <span class="qty-num">9</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:31%"></div></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rank rank-other center">8</td>
+        <td><span class="product-name">REAL MADRID 99-00</span></td>
+        <td><span class="dorsal-badge">RAUL · 7</span></td>
+        <td>
+          <div class="qty-bar-wrap">
+            <span class="qty-num">9</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:31%"></div></div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="rank rank-other center">8</td>
+        <td><span class="product-name">ARGENTINA 2006 HOME</span></td>
+        <td><span class="dorsal-badge">MESSI · 19</span></td>
+        <td>
+          <div class="qty-bar-wrap">
+            <span class="qty-num">9</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:31%"></div></div>
+          </div>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== TALLES POR PRODUCTO ===== -->
+<div class="ranking-wrapper">
+  <p class="section-title">Talles más vendidos por producto</p>
+</div>
+
+<div class="talles-section">
+
+  <!-- 1. ARGENTINA 94 AWAY — MARADONA 10 -->
+  <!-- max = 12 -->
+  <div class="talle-card">
+    <div class="talle-card-header">
+      <span class="talle-rank-badge">#1</span>
+      <div>
+        <div class="talle-card-title">ARGENTINA 94 AWAY</div>
+        <div class="talle-card-dorsal">MARADONA · 10 &nbsp;|&nbsp; 29 unidades</div>
+      </div>
+    </div>
+    <table class="talle-table">
+      <thead><tr><th>Talle</th><th class="center">Cant.</th><th>Distribución</th></tr></thead>
+      <tbody>
+        <tr class="top-talle">
+          <td class="talle-name">XL</td>
+          <td class="talle-qty center">12</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-xl" style="width:100%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">2XL</td>
+          <td class="talle-qty center">6</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-2xl" style="width:50%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">L</td>
+          <td class="talle-qty center">5</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-l" style="width:42%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">M</td>
+          <td class="talle-qty center">3</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-m" style="width:25%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">S</td>
+          <td class="talle-qty center">1</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-s" style="width:8%"></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2. LIVERPOOL 93-94 -->
+  <!-- max = 15 -->
+  <div class="talle-card">
+    <div class="talle-card-header">
+      <span class="talle-rank-badge">#2</span>
+      <div>
+        <div class="talle-card-title">LIVERPOOL 93-94</div>
+        <div class="talle-card-dorsal">Sin dorsal &nbsp;|&nbsp; 16 unidades</div>
+      </div>
+    </div>
+    <table class="talle-table">
+      <thead><tr><th>Talle</th><th class="center">Cant.</th><th>Distribución</th></tr></thead>
+      <tbody>
+        <tr class="top-talle">
+          <td class="talle-name">XL</td>
+          <td class="talle-qty center">15</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-xl" style="width:100%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">2XL</td>
+          <td class="talle-qty center">10</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-2xl" style="width:67%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">L</td>
+          <td class="talle-qty center">5</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-l" style="width:33%"></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3. ARGENTINA 2026 HOME -->
+  <!-- max = 7 -->
+  <div class="talle-card">
+    <div class="talle-card-header">
+      <span class="talle-rank-badge">#3</span>
+      <div>
+        <div class="talle-card-title">ARGENTINA 2026 HOME</div>
+        <div class="talle-card-dorsal">Sin dorsal &nbsp;|&nbsp; 14 unidades</div>
+      </div>
+    </div>
+    <table class="talle-table">
+      <thead><tr><th>Talle</th><th class="center">Cant.</th><th>Distribución</th></tr></thead>
+      <tbody>
+        <tr class="top-talle">
+          <td class="talle-name">XL</td>
+          <td class="talle-qty center">7</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-xl" style="width:100%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">2XL</td>
+          <td class="talle-qty center">6</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-2xl" style="width:86%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">M</td>
+          <td class="talle-qty center">4</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-m" style="width:57%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">4XL</td>
+          <td class="talle-qty center">3</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-4xl" style="width:43%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">3XL</td>
+          <td class="talle-qty center">2</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-3xl" style="width:29%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">L</td>
+          <td class="talle-qty center">1</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-l" style="width:14%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">S</td>
+          <td class="talle-qty center">1</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-s" style="width:14%"></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4. BETIS 24-25 HOME M/L — LO CELSO 20 -->
+  <!-- max = 8 -->
+  <div class="talle-card">
+    <div class="talle-card-header">
+      <span class="talle-rank-badge">#4</span>
+      <div>
+        <div class="talle-card-title">BETIS 24-25 HOME M/L</div>
+        <div class="talle-card-dorsal">LO CELSO · 20 &nbsp;|&nbsp; 12 unidades</div>
+      </div>
+    </div>
+    <table class="talle-table">
+      <thead><tr><th>Talle</th><th class="center">Cant.</th><th>Distribución</th></tr></thead>
+      <tbody>
+        <tr class="top-talle">
+          <td class="talle-name">XL</td>
+          <td class="talle-qty center">8</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-xl" style="width:100%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">2XL</td>
+          <td class="talle-qty center">4</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-2xl" style="width:50%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">XXL</td>
+          <td class="talle-qty center">2</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-def" style="width:25%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">L</td>
+          <td class="talle-qty center">1</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-l" style="width:12%"></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5. CHELSEA 25-26 AWAY 3TH — ENZO 8 -->
+  <!-- max = 3 -->
+  <div class="talle-card">
+    <div class="talle-card-header">
+      <span class="talle-rank-badge">#5</span>
+      <div>
+        <div class="talle-card-title">CHELSEA 25-26 AWAY 3TH</div>
+        <div class="talle-card-dorsal">ENZO · 8 &nbsp;|&nbsp; 11 unidades</div>
+      </div>
+    </div>
+    <table class="talle-table">
+      <thead><tr><th>Talle</th><th class="center">Cant.</th><th>Distribución</th></tr></thead>
+      <tbody>
+        <tr class="top-talle">
+          <td class="talle-name">XL</td>
+          <td class="talle-qty center">3</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-xl" style="width:100%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">L</td>
+          <td class="talle-qty center">2</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-l" style="width:67%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">2XL</td>
+          <td class="talle-qty center">2</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-2xl" style="width:67%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">M</td>
+          <td class="talle-qty center">1</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-m" style="width:33%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">3XL</td>
+          <td class="talle-qty center">1</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-3xl" style="width:33%"></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 6. SHORT CHELSEA VERDE 25-26 -->
+  <!-- max = 4 -->
+  <div class="talle-card">
+    <div class="talle-card-header">
+      <span class="talle-rank-badge">#6</span>
+      <div>
+        <div class="talle-card-title">SHORT CHELSEA VERDE 25-26</div>
+        <div class="talle-card-dorsal">· 8 &nbsp;|&nbsp; 10 unidades</div>
+      </div>
+    </div>
+    <table class="talle-table">
+      <thead><tr><th>Talle</th><th class="center">Cant.</th><th>Distribución</th></tr></thead>
+      <tbody>
+        <tr class="top-talle">
+          <td class="talle-name">L</td>
+          <td class="talle-qty center">4</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-l" style="width:100%"></div></div></div></td>
+        </tr>
+        <tr class="top-talle">
+          <td class="talle-name">XL</td>
+          <td class="talle-qty center">4</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-xl" style="width:100%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">2XL</td>
+          <td class="talle-qty center">2</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-2xl" style="width:50%"></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 7. SHORT CHELSEA NEGRO 25-26 -->
+  <!-- max = 3 -->
+  <div class="talle-card">
+    <div class="talle-card-header">
+      <span class="talle-rank-badge">#6</span>
+      <div>
+        <div class="talle-card-title">SHORT CHELSEA NEGRO 25-26</div>
+        <div class="talle-card-dorsal">· 8 &nbsp;|&nbsp; 10 unidades</div>
+      </div>
+    </div>
+    <table class="talle-table">
+      <thead><tr><th>Talle</th><th class="center">Cant.</th><th>Distribución</th></tr></thead>
+      <tbody>
+        <tr class="top-talle">
+          <td class="talle-name">XL</td>
+          <td class="talle-qty center">3</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-xl" style="width:100%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">L</td>
+          <td class="talle-qty center">2</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-l" style="width:67%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">2XL</td>
+          <td class="talle-qty center">2</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-2xl" style="width:67%"></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 8. ARGENTINA 2006 AWAY — MESSI 19 -->
+  <!-- max = 4 -->
+  <div class="talle-card">
+    <div class="talle-card-header">
+      <span class="talle-rank-badge">#8</span>
+      <div>
+        <div class="talle-card-title">ARGENTINA 2006 AWAY</div>
+        <div class="talle-card-dorsal">MESSI · 19 &nbsp;|&nbsp; 9 unidades</div>
+      </div>
+    </div>
+    <table class="talle-table">
+      <thead><tr><th>Talle</th><th class="center">Cant.</th><th>Distribución</th></tr></thead>
+      <tbody>
+        <tr class="top-talle">
+          <td class="talle-name">XL</td>
+          <td class="talle-qty center">4</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-xl" style="width:100%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">L</td>
+          <td class="talle-qty center">3</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-l" style="width:75%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">2XL</td>
+          <td class="talle-qty center">2</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-2xl" style="width:50%"></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 9. REAL MADRID 99-00 — RAUL 7 -->
+  <!-- max = 3 -->
+  <div class="talle-card">
+    <div class="talle-card-header">
+      <span class="talle-rank-badge">#8</span>
+      <div>
+        <div class="talle-card-title">REAL MADRID 99-00</div>
+        <div class="talle-card-dorsal">RAUL · 7 &nbsp;|&nbsp; 9 unidades</div>
+      </div>
+    </div>
+    <table class="talle-table">
+      <thead><tr><th>Talle</th><th class="center">Cant.</th><th>Distribución</th></tr></thead>
+      <tbody>
+        <tr class="top-talle">
+          <td class="talle-name">XL</td>
+          <td class="talle-qty center">3</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-xl" style="width:100%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">2XL</td>
+          <td class="talle-qty center">1</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-2xl" style="width:33%"></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 10. ARGENTINA 2006 HOME — MESSI 19 -->
+  <!-- max = 4 -->
+  <div class="talle-card">
+    <div class="talle-card-header">
+      <span class="talle-rank-badge">#8</span>
+      <div>
+        <div class="talle-card-title">ARGENTINA 2006 HOME</div>
+        <div class="talle-card-dorsal">MESSI · 19 &nbsp;|&nbsp; 9 unidades</div>
+      </div>
+    </div>
+    <table class="talle-table">
+      <thead><tr><th>Talle</th><th class="center">Cant.</th><th>Distribución</th></tr></thead>
+      <tbody>
+        <tr class="top-talle">
+          <td class="talle-name">L</td>
+          <td class="talle-qty center">4</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-l" style="width:100%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">XL</td>
+          <td class="talle-qty center">3</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-xl" style="width:75%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td class="talle-name">2XL</td>
+          <td class="talle-qty center">1</td>
+          <td><div class="talle-bar-wrap"><div class="talle-bar-bg"><div class="talle-bar-fill fill-2xl" style="width:25%"></div></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<p class="footer">Datos extraídos del spreadsheet de ventas · Mayo 2026</p>
+
+</body>
+</html>
