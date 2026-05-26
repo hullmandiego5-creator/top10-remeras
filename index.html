@@ -111,14 +111,6 @@ body {
 .conclusion-box p { font-size: 0.85rem; color: #aaa; line-height: 1.7; }
 .conclusion-box strong { color: #f0c040; }
 
-/* ── CATALOGO PREVIEW ── */
-.catalogo-preview { max-width: 860px; margin: 0 auto 64px; }
-.catalogo-frame-wrap { border-radius: 14px; overflow: hidden; border: 1px solid #2a2a40; box-shadow: 0 4px 32px rgba(0,0,0,0.4); background: #13131e; }
-.catalogo-frame-wrap iframe { display: block; width: 100%; height: 520px; border: none; }
-.catalogo-frame-footer { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; background: #1a1a2e; }
-.catalogo-frame-footer span { font-size: 0.72rem; color: #555; letter-spacing: 1px; text-transform: uppercase; }
-.catalogo-frame-footer a { font-size: 0.72rem; font-weight: 700; color: #f0c040; text-decoration: none; letter-spacing: 1px; text-transform: uppercase; }
-.catalogo-frame-footer a:hover { text-decoration: underline; }
 
 @media (max-width: 600px) {
   .cards { grid-template-columns: 1fr; }
@@ -128,7 +120,7 @@ body {
   .pago-name { min-width: 120px; font-size: 0.78rem; }
   .mercado-table { font-size: 0.72rem; }
   .mercado-table th, .mercado-table td { padding: 8px 8px; }
-  .catalogo-frame-wrap iframe { height: 360px; }
+
 }
 </style>
 </head>
@@ -155,23 +147,6 @@ body {
   <a class="catalogo-btn" href="https://drive.google.com/drive/folders/1A9vnWdVIxp11mnvz1J1PxGHmkmwKoUW3?usp=sharing" target="_blank" rel="noopener">
     📂 Ver Catálogo Completo
   </a>
-</div>
-
-<!-- CATALOGO PREVIEW -->
-<div class="catalogo-preview">
-  <p class="section-label" style="max-width:860px;margin:0 auto 6px">Catálogo de productos</p>
-  <p class="section-desc" style="max-width:860px;margin:0 auto 18px;padding-left:13px">Explorá todas las imágenes disponibles</p>
-  <div class="catalogo-frame-wrap">
-    <iframe
-      src="https://drive.google.com/embeddedfolderview?id=1A9vnWdVIxp11mnvz1J1PxGHmkmwKoUW3#grid"
-      allowfullscreen
-      loading="lazy"
-    ></iframe>
-    <div class="catalogo-frame-footer">
-      <span>The Jersey Palace — Catálogo</span>
-      <a href="https://drive.google.com/drive/folders/1A9vnWdVIxp11mnvz1J1PxGHmkmwKoUW3?usp=sharing" target="_blank" rel="noopener">Abrir en Drive →</a>
-    </div>
-  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
