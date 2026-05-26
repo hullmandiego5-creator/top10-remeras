@@ -21,9 +21,14 @@ body {
 .brand-sub { font-size: 0.7rem; letter-spacing: 3px; color: #444; text-transform: uppercase; margin-top: 6px; }
 
 /* ── NAV ── */
-.nav { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 52px; }
+.nav { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
 .nav a { text-decoration: none; font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 7px 14px; border-radius: 20px; border: 1px solid #2a2a40; color: #888; transition: all 0.2s; }
 .nav a:hover { border-color: #f0c040; color: #f0c040; }
+
+/* ── CATALOGO BTN ── */
+.catalogo-wrap { text-align: center; margin-bottom: 48px; }
+.catalogo-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; background: linear-gradient(135deg, #e07020, #f0c040); color: #000; font-weight: 900; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; padding: 14px 32px; border-radius: 30px; box-shadow: 0 4px 24px rgba(240,192,64,0.3); transition: all 0.2s; }
+.catalogo-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(240,192,64,0.5); }
 
 /* ── SECTION ── */
 .section { max-width: 860px; margin: 0 auto 64px; }
@@ -135,6 +140,12 @@ body {
   <a href="#talles">Por Talle</a>
   <a href="#mercado">Estudio de Mercado</a>
 </nav>
+
+<div class="catalogo-wrap">
+  <a class="catalogo-btn" href="https://drive.google.com/drive/folders/1A9vnWdVIxp11mnvz1J1PxGHmkmwKoUW3?usp=sharing" target="_blank" rel="noopener">
+    📂 Ver Catálogo Completo
+  </a>
+</div>
 
 <!-- ══════════════════════════════════════════
      1. PREGUNTAS FRECUENTES
