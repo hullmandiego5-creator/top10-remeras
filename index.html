@@ -112,6 +112,20 @@ body {
 .conclusion-box strong { color: #f0c040; }
 
 
+/* ── PEDIDOS GALERIA ── */
+.pedidos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.pedidos-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; border: 1px solid #1e1e30; cursor: pointer; transition: transform 0.2s, border-color 0.2s; }
+.pedidos-grid img:hover { transform: scale(1.03); border-color: #f0c040; }
+.trust-badge { display: flex; align-items: center; gap: 10px; background: #13131e; border-radius: 10px; border: 1px solid #1e1e30; border-left: 3px solid #2ecc71; padding: 12px 18px; margin-bottom: 16px; }
+.trust-badge span { font-size: 0.82rem; color: #aaa; line-height: 1.5; }
+.trust-badge strong { color: #2ecc71; }
+
+/* ── LIGHTBOX ── */
+#lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; }
+#lightbox.open { display: flex; }
+#lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 10px; object-fit: contain; }
+#lightbox-close { position: absolute; top: 20px; right: 28px; font-size: 2rem; color: #fff; cursor: pointer; line-height: 1; }
+
 @media (max-width: 600px) {
   .cards { grid-template-columns: 1fr; }
   .stats-row { grid-template-columns: 1fr 1fr; }
@@ -120,7 +134,7 @@ body {
   .pago-name { min-width: 120px; font-size: 0.78rem; }
   .mercado-table { font-size: 0.72rem; }
   .mercado-table th, .mercado-table td { padding: 8px 8px; }
-
+  .pedidos-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -141,6 +155,7 @@ body {
   <a href="#dorsal">Por Dorsal</a>
   <a href="#talles">Por Talle</a>
   <a href="#mercado">Estudio de Mercado</a>
+  <a href="#pedidos">Pedidos Enviados</a>
 </nav>
 
 <div class="catalogo-wrap">
@@ -665,6 +680,48 @@ body {
     </p>
   </div>
 </div>
+
+<!-- ══════════════════════════════════════════
+     PEDIDOS ENVIADOS A MAYORISTAS
+══════════════════════════════════════════ -->
+<div class="section" id="pedidos">
+  <p class="section-label">Pedidos enviados a mayoristas</p>
+  <p class="section-desc">Fotos reales de pedidos despachados — así llega la mercadería</p>
+
+  <div class="trust-badge">
+    <span style="font-size:1.4rem">✅</span>
+    <span><strong>100% real.</strong> Estas son fotos de pedidos reales enviados a revendedores de todo el país. Mercadería embolsada, con etiquetas y lista para revender.</span>
+  </div>
+
+  <div class="pedidos-grid">
+    <img src="pedidos/pedido1.jpg" alt="Pedido mayorista 1" onclick="openLightbox(this.src)">
+    <img src="pedidos/pedido2.jpg" alt="Pedido mayorista 2" onclick="openLightbox(this.src)">
+    <img src="pedidos/pedido3.jpg" alt="Pedido mayorista 3" onclick="openLightbox(this.src)">
+    <img src="pedidos/pedido4.jpg" alt="Pedido mayorista 4" onclick="openLightbox(this.src)">
+    <img src="pedidos/pedido5.jpg" alt="Pedido mayorista 5" onclick="openLightbox(this.src)">
+    <img src="pedidos/pedido6.jpg" alt="Pedido mayorista 6" onclick="openLightbox(this.src)">
+    <img src="pedidos/pedido7.jpg" alt="Pedido mayorista 7" onclick="openLightbox(this.src)">
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <span id="lightbox-close" onclick="closeLightbox()">×</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
 
 </body>
 </html>
